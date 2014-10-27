@@ -8,10 +8,10 @@ var originalBorder;                         // to hold the original border style
 var invalidBorder = "1px solid #FF0000";    // the invalid border style
 
 function onLoad() {
-    var signupForm = document.getElementById('signup');
-    var stateField = signupForm.elements['state'];
-    var occupationField = document.getElementById('occupation');
-    var cancelButton = document.getElementById('cancelButton');
+    var signupForm = document.getElementById("signup");
+    var stateField = signupForm.elements["state"];
+    var occupationField = document.getElementById("occupation");
+    var cancelButton = document.getElementById("cancelButton");
 
     // store the original border style
     originalBorder = stateField.style.border;
@@ -26,7 +26,7 @@ function onLoad() {
     }
 
     // add all the event listeners
-    signupForm.addEventListener('submit', onSubmit);
+    signupForm.addEventListener("submit", onSubmit);
     occupationField.addEventListener("change", onOccupationChange);
 
     // below uses the ugly window.confirm, which is commented out because 
@@ -56,16 +56,16 @@ function onSubmit(evt) {
 function validateForm(signupForm) {
     var isValid = true;
 
-    var firstNameField = signupForm.elements['firstName'];
-    var lastNameField = signupForm.elements['lastName'];
-    var address1Field = signupForm.elements['address1'];
-    var cityField = signupForm.elements['city'];
-    var stateField = signupForm.elements['state'];
+    var firstNameField = signupForm.elements["firstName"];
+    var lastNameField = signupForm.elements["lastName"];
+    var address1Field = signupForm.elements["address1"];
+    var cityField = signupForm.elements["city"];
+    var stateField = signupForm.elements["state"];
 
-    var zipField = signupForm.elements['zip'];
-    var birthdayField = signupForm.elements['birthdate'];
-    var occupationField = signupForm.elements['occupation'];
-    var occupationOtherField = signupForm.elements['occupationOther'];
+    var zipField = signupForm.elements["zip"];
+    var birthdayField = signupForm.elements["birthdate"];
+    var occupationField = signupForm.elements["occupation"];
+    var occupationOtherField = signupForm.elements["occupationOther"];
 
     // validates all the required fields
     isValid &= validateString(firstNameField);
@@ -93,7 +93,7 @@ function validateString(field) {
 
 // validate zip code field
 function validateZipcode(zipField) {
-    var zipRegExp = new RegExp('^\\d{5}$')
+    var zipRegExp = new RegExp("^\\d{5}$")
     if (!zipRegExp.test(zipField.value.trim())) {
         zipField.style.border = invalidBorder;
         return false;
@@ -138,11 +138,11 @@ function validateAge(birthdayField, dob) {
     }
     if (yearsDiff < requiredAge) {
         birthdayField.style.border = invalidBorder;
-        document.getElementById('birthdateMessage').innerHTML = "Sorry, you must be at least 13 years or older to sign up.";
+        document.getElementById("birthdateMessage").innerHTML = "Sorry, you must be at least 13 years or older to sign up.";
         return false;
     } else {
         birthdayField.style.border = originalBorder;
-        document.getElementById('birthdateMessage').innerHTML = "";
+        document.getElementById("birthdateMessage").innerHTML = "";
         return true;
     }
         
@@ -151,15 +151,15 @@ function validateAge(birthdayField, dob) {
 function onOccupationChange() {
     // use getElementsByName here to return an array and pick the first one since the Id tag is missing
     if (this.value == "other") {
-        document.getElementsByName('occupationOther')[0].style.display = "block";
+        document.getElementsByName("occupationOther")[0].style.display = "block";
     } else {
-        document.getElementsByName('occupationOther')[0].style.display = "none";
+        document.getElementsByName("occupationOther")[0].style.display = "none";
     }
 }
 
 // window.confirm version of the confirmation dialog
 function onClick() {
-    var resp = window.confirm('Are you really want to leave?');
+    var resp = window.confirm("Are you really want to leave?");
     if (resp == true) {
         window.location = "http://google.com";
     } else {
