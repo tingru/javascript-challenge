@@ -56,25 +56,16 @@ function onSubmit(evt) {
 function validateForm(signupForm) {
     var isValid = true;
 
-    var firstNameField = signupForm.elements["firstName"];
-    var lastNameField = signupForm.elements["lastName"];
-    var address1Field = signupForm.elements["address1"];
-    var cityField = signupForm.elements["city"];
-    var stateField = signupForm.elements["state"];
+    var requiredStringFields = ['firstName', 'lastName', 'address1', 'city', 'state'];
+    for (var i = 0; i < requiredStringFields.length; i++) {
+        isValid &= validateString(signupForm.elements[requiredStringFields[i]]);
+    }
 
     var zipField = signupForm.elements["zip"];
     var birthdayField = signupForm.elements["birthdate"];
-    var occupationField = signupForm.elements["occupation"];
-    var occupationOtherField = signupForm.elements["occupationOther"];
 
-    // validates all the required fields
-    isValid &= validateString(firstNameField);
-    isValid &= validateString(lastNameField);
-    isValid &= validateString(address1Field);
-    isValid &= validateString(cityField);
-    isValid &= validateString(stateField);
+    // validates zipcode and age differently
     isValid &= validateZipcode(zipField);
-    isValid &= validateOccupation(occupationField, occupationOtherField);
     isValid &= validateAge(birthdayField, birthdayField.value);
 
     return isValid;
@@ -99,23 +90,6 @@ function validateZipcode(zipField) {
         return false;
     } else {
         zipField.style.border = originalBorder;
-        return true;
-    }
-}
-
-// validate occupation field
-function validateOccupation(occupationField, occupationOtherField) {
-    if (!validateString(occupationField)) {
-        return false;
-    } else if (occupationField.value == "other") {
-        if (!validateString(occupationOtherField)) {
-            return false;
-        } else {
-            occupationOtherField.style.border = originalBorder;
-            return true;
-        }
-    } else {
-        occupationField.style.border = originalBorder;
         return true;
     }
 }
