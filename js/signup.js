@@ -84,7 +84,7 @@ function validateString(field) {
 
 // validate zip code field
 function validateZipcode(zipField) {
-    var zipRegExp = new RegExp("^\\d{5}$")
+    var zipRegExp = new RegExp("^\\d{5}$");
     if (!zipRegExp.test(zipField.value.trim())) {
         zipField.style.border = invalidBorder;
         return false;
